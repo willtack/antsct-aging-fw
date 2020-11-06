@@ -1,8 +1,8 @@
 {
-	"name": "antsct-aging-fw",
-	"label": "FTDC ANTs Cortical Thickness",
-	"description": "Gear version of the FTDC antsCorticalThickness.sh pipeline for aging populations. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
-	"version": "0.0.1_0.1.4",
+	"name": "antsct-fw",
+	"label": "ANTs Cortical Thickness",
+	"description": "Gear version of the antsCorticalThickness.sh pipeline. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
+	"version": "0.3.1_0.1.4",
 	"inputs": {
 		"api_key": {
       		"base": "api-key"
@@ -64,12 +64,12 @@
 	"maintainer": "Philip Cook, Will Tackett",
 	"cite": "Tustison, Nicholas \u0026 Avants, Brian \u0026 Cook, Philip \u0026 Song, Gang \u0026 Das, Sandhitsu \u0026 van Strien, Niels \u0026 Stone, James \u0026 Gee, James. (2013). The ANTs cortical thickness processing pipeline. Progress in Biomedical Optics and Imaging - Proceedings of SPIE. 8672. 86720K. 10.1117/12.2007128. ",
 	"license": "Apache-2.0",
-	"source": "https://github.com/willtack/antsct-aging-fw",
+	"source": "https://github.com/ftdc-picsl/antsct_fw",
 	"url": "https://doi.org/10.1117/12.2007128",
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
-			"image": "willtack/antsct-aging-fw:0.0.1_0.1.4"
+			"image": "willtack/antsct-fw:0.3.1_0.1.4"
 		},
 		"flywheel":{"suite": "BrainScienceCenter"}
 	}
