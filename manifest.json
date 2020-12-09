@@ -1,24 +1,44 @@
 {
-	"name": "antsct-fw",
-	"label": "ANTs Cortical Thickness",
-	"description": "Gear version of the antsCorticalThickness.sh pipeline. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
-	"version": "0.3.1_0.1.4",
+	"name": "antsct-aging-fw",
+	"label": "FTDC ANTs Cortical Thickness",
+	"description": "Gear version of the FTDC antsCorticalThickness pipeline for aging populations. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
+	"version": "0.0.1_0.1.4",
 	"inputs": {
 		"api_key": {
-      		"base": "api-key"
-    		},
+			"base": "api-key"
+		},
 		"t1_anatomy": {
-      		"description": "T1-weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session's BIDS dataset.",
-      		"base": "file",
-      		"optional": true,
-      		"type": {
-        		"enum": [
-          			"nifti"
-        		]
+			"base": "file",
+			"description": "T1-weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session's BIDS dataset.",
+			"optional": true,
+			"type": {
+				"enum": [
+					"nifti"
+				]
 			}
-    	}
+		}
 	},
 	"config": {
+		"BIDS-acq": {
+			"default": "",
+			"description": "The acq- field of the input image filename. Leave blank if the correct file is distinguishable without an acq- field.",
+			"type": "string"
+		},
+		"BIDS-run": {
+			"default": "",
+			"description": "The run- field of the input image filename. Leave blank if there is only one run.",
+			"type": "string"
+		},
+		"BIDS-session": {
+			"default": "",
+			"description": "The ses- field of the input image filename. Leave blank if the correct file is distinguishable without a ses- field.",
+			"type": "string"
+		},
+		"BIDS-subject": {
+			"default": "",
+			"description": "The sub- field of the input image filename. Leave blank if the correct file is distinguishable without a sub- field.",
+			"type": "string"
+		},
 		"denoise": {
 			"default": true,
 			"description": "Run denoising within the ACT pipeline.",
@@ -38,39 +58,19 @@
 			"default": true,
 			"description": "'true' to run the trim_neck.sh script, 'false' to use the raw data.",
 			"type": "boolean"
-		},
-		"BIDS-subject": {
-			"default": "",
-			"description": "The sub- field of the input image filename. Leave blank if the correct file is distinguishable without a sub- field.",
-			"type": "string"
-		},
-		"BIDS-session": {
-			"default": "",
-			"description": "The ses- field of the input image filename. Leave blank if the correct file is distinguishable without a ses- field.",
-			"type": "string"
-		},
-		"BIDS-acq": {
-			"default": "",
-			"description": "The acq- field of the input image filename. Leave blank if the correct file is distinguishable without an acq- field.",
-			"type": "string"
-		},
-		"BIDS-run": {
-			"default": "",
-			"description": "The run- field of the input image filename. Leave blank if there is only one run.",
-			"type": "string"
 		}
 	},
 	"author": "Tustison, et al. | Modified for Flywheel by Philip Cook, Will Tackett",
 	"maintainer": "Philip Cook, Will Tackett",
 	"cite": "Tustison, Nicholas \u0026 Avants, Brian \u0026 Cook, Philip \u0026 Song, Gang \u0026 Das, Sandhitsu \u0026 van Strien, Niels \u0026 Stone, James \u0026 Gee, James. (2013). The ANTs cortical thickness processing pipeline. Progress in Biomedical Optics and Imaging - Proceedings of SPIE. 8672. 86720K. 10.1117/12.2007128. ",
 	"license": "Apache-2.0",
-	"source": "https://github.com/ftdc-picsl/antsct_fw",
+	"source": "https://github.com/willtack/antsct-aging-fw",
 	"url": "https://doi.org/10.1117/12.2007128",
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
-			"image": "willtack/antsct-fw:0.3.1_0.1.4"
+			"image": "willtack/antsct-aging-fw:0.0.1_0.1.4"
 		},
-		"flywheel":{"suite": "BrainScienceCenter"}
+		"flywheel":{"suite": "FTD Center"}
 	}
 }
