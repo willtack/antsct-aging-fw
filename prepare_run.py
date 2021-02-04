@@ -42,6 +42,14 @@ with flywheel.GearContext() as context:
     manual_t1_path = None if manual_t1 is None else \
         PosixPath(context.get_input_path('t1_anatomy'))
 
+    mni_cort_labels = context.get_input('mni-cortical-labels')
+    mni_cort_labels_path = None if mni_cort_labels is None else \
+        PosixPath(context.get_input_path('mni-cortical-labels'))
+
+    mni_labels = context.get_input('mni-labels')
+    mni_labels_path = None if mni_labels is None else \
+        PosixPath(context.get_input_path('mni-labels'))
+
     logger.info("manual_t1: %s" % manual_t1)
     logger.info("manual_t1_path: %s" % manual_t1_path)
 
@@ -70,6 +78,12 @@ def write_command(anat_input, prefix):
                '--run-quick {}'.format(run_quick),
                '--trim-neck {}'.format(trim_neck)
                ]
+        if mni_cort_labels_path is not None:
+            cmd.append('--mni-cortical-labels {}'.format(mni_cort_labels_path))
+
+        if mni_labels is not None:
+            cmd.append('--mni-labels {}'.format(mni_labels_path))
+
     logger.info(' '.join(cmd))
     with antsct_script.open('w') as f:
         f.write(' '.join(cmd))
@@ -82,11 +96,6 @@ def fw_heudiconv_download():
     subjects = [subject_container.label]
     sessions = [session_container.label]
 
-    # Do the download!
-    bids_root.parent.mkdir(parents=True, exist_ok=True)
-    downloads = export.gather_bids(fw, project_label, subjects, sessions)
-    export.download_bids(fw, downloads, str(bids_dir.resolve()), dry_run=False, folders_to_download=['anat'])
-
     # Use manually specified T1 if it exists
     if manual_t1 is not None:
         anat_input = manual_t1_path
@@ -94,6 +103,11 @@ def fw_heudiconv_download():
         session_label = session_container.label.replace('_', 'x')
         prefix = 'sub-{}_ses-{}_'.format(subject_label, session_label)
         return True, anat_input, prefix
+
+    # Do the download!
+    bids_root.parent.mkdir(parents=True, exist_ok=True)
+    downloads = export.gather_bids(fw, project_label, subjects, sessions)
+    export.download_bids(fw, downloads, str(bids_dir.resolve()), dry_run=False, folders_to_download=['anat'])
 
     layout = BIDSLayout(bids_root)
 

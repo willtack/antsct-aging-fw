@@ -2,7 +2,7 @@
 	"name": "antsct-aging-fw",
 	"label": "FTDC ANTs Cortical Thickness",
 	"description": "Gear version of the FTDC antsCorticalThickness pipeline for aging populations. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
-	"version": "0.0.1_0.1.4",
+	"version": "0.1.0_0.2.0",
 	"inputs": {
 		"api_key": {
 			"base": "api-key"
@@ -10,6 +10,26 @@
 		"t1_anatomy": {
 			"base": "file",
 			"description": "T1-weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session's BIDS dataset.",
+			"optional": true,
+			"type": {
+				"enum": [
+					"nifti"
+				]
+			}
+		},
+		"mni-labels": {
+			"base": "file",
+			"description": "One or more generic label images in the MNI152NLin2009cAsym space, to be warped to the subject space.",
+			"optional": true,
+			"type": {
+				"enum": [
+					"nifti"
+				]
+			}
+		},
+		"mni-cortical-labels": {
+			"base": "file",
+			"description": " One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
 			"optional": true,
 			"type": {
 				"enum": [
@@ -69,7 +89,7 @@
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
-			"image": "willtack/antsct-aging-fw:0.0.1_0.1.4"
+			"image": "willtack/antsct-aging-fw:0.1.0_0.2.0"
 		},
 		"flywheel":{"suite": "FTD Center"}
 	}

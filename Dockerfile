@@ -2,7 +2,7 @@
 
 ############################
 # Get the image from DockerHub
-FROM cookpa/antsct-aging:0.1.4
+FROM cookpa/antsct-aging:0.2.0
 
 MAINTAINER Will Tackett <William.Tackett@pennmedicine.upenn.edu>
 
