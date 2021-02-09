@@ -39,22 +39,59 @@ with flywheel.GearContext() as context:
 
     # inputs
     manual_t1 = context.get_input('t1_anatomy')
-    manual_t1_path = None if manual_t1 is None else \
+    manual_t1_path_config = None if manual_t1 is None else \
         PosixPath(context.get_input_path('t1_anatomy'))
 
-    mni_cort_labels = context.get_input('mni-cortical-labels')
-    mni_cort_labels_path = None if mni_cort_labels is None else \
-        PosixPath(context.get_input_path('mni-cortical-labels'))
+    # replace any spaces in the string
+    if ' ' in str(manual_t1_path_config):
+        manual_t1_path = PosixPath(str(manual_t1_path_config).replace(' ', '_'))
+        # rename the actual file
+        os.rename(manual_t1_path_config, manual_t1_path)
+    else:
+        manual_t1_path = manual_t1_path_config
 
-    mni_labels = context.get_input('mni-labels')
-    mni_labels_path = None if mni_labels is None else \
-        PosixPath(context.get_input_path('mni-labels'))
+    mni_cort_labels_1 = context.get_input('mni-cortical-labels-1')
+    mni_cort_labels_1_path = None if mni_cort_labels_1 is None else \
+        PosixPath(context.get_input_path('mni-cortical-labels-1'))
+    
+    mni_cort_labels_2 = context.get_input('mni-cortical-labels-2')
+    mni_cort_labels_2_path = None if mni_cort_labels_2 is None else \
+        PosixPath(context.get_input_path('mni-cortical-labels-2'))
+    
+    mni_cort_labels_3 = context.get_input('mni-cortical-labels-3')
+    mni_cort_labels_3_path = None if mni_cort_labels_3 is None else \
+        PosixPath(context.get_input_path('mni-cortical-labels-3'))
 
+    # create space separated list (str)
+    mni_cort_labels_path_list = [mni_cort_labels_1_path, mni_cort_labels_2_path, mni_cort_labels_3_path]
+    # use list comprehension to remove None values
+    mni_cort_labels_path_list = [str(i) for i in mni_cort_labels_path_list if i]
+    mni_cort_labels_paths_str = " ".join(mni_cort_labels_path_list)
+
+    mni_labels_1 = context.get_input('mni-labels-1')
+    mni_labels_1_path = None if mni_labels_1 is None else \
+        PosixPath(context.get_input_path('mni-labels-1'))
+    
+    mni_labels_2 = context.get_input('mni-labels-2')
+    mni_labels_2_path = None if mni_labels_2 is None else \
+        PosixPath(context.get_input_path('mni-labels-2'))
+    
+    mni_labels_3 = context.get_input('mni-labels-3')
+    mni_labels_3_path = None if mni_labels_3 is None else \
+        PosixPath(context.get_input_path('mni-labels-3'))
+    
+    # create space separated list (str)
+    mni_labels_path_list = [mni_labels_1_path, mni_labels_2_path, mni_labels_3_path]
+    # use list comprehension to remove None values
+    mni_labels_path_list = [str(i) for i in mni_labels_path_list if i]
+    mni_labels_paths_str = " ".join(mni_labels_path_list)
+
+    # Get T1 image
     logger.info("manual_t1: %s" % manual_t1)
     logger.info("manual_t1_path: %s" % manual_t1_path)
 
     # configs, use int() to translate the booleans to 0 or 1
-    output_prefix = config.get('output-file-root')
+    # output_prefix = config.get('output-file-root')
     denoise = int(config.get('denoise'))
     num_threads = config.get('num-threads')
     run_quick = int(config.get('run-quick'))
@@ -78,11 +115,11 @@ def write_command(anat_input, prefix):
                '--run-quick {}'.format(run_quick),
                '--trim-neck {}'.format(trim_neck)
                ]
-        if mni_cort_labels_path is not None:
-            cmd.append('--mni-cortical-labels {}'.format(mni_cort_labels_path))
+        if mni_cort_labels_paths_str:
+            cmd.append('--mni-cortical-labels {}'.format(mni_cort_labels_paths_str))
 
-        if mni_labels is not None:
-            cmd.append('--mni-labels {}'.format(mni_labels_path))
+        if mni_labels_paths_str:
+            cmd.append('--mni-labels {}'.format(mni_labels_paths_str))
 
     logger.info(' '.join(cmd))
     with antsct_script.open('w') as f:
