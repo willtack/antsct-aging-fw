@@ -6,6 +6,7 @@ from pathlib import PosixPath
 from fw_heudiconv.cli import export
 from bids import BIDSLayout
 import flywheel
+import json
 import os
 
 # logging stuff
@@ -41,6 +42,10 @@ with flywheel.GearContext() as context:
     manual_t1 = context.get_input('t1_anatomy')
     manual_t1_path_config = None if manual_t1 is None else \
         PosixPath(context.get_input_path('t1_anatomy'))
+
+    bids_filter = context.get_input('bids-filter-file')
+    bids_filter_path = None if bids_filter is None else \
+        PosixPath(context.get_input_path('bids-filter-file'))
 
     # replace any spaces in the string
     if ' ' in str(manual_t1_path_config):
@@ -147,26 +152,39 @@ def fw_heudiconv_download():
     export.download_bids(fw, downloads, str(bids_dir.resolve()), dry_run=False, folders_to_download=['anat'])
 
     layout = BIDSLayout(bids_root)
-
-    # Get subject and session label
-    # subject_label = layout.get(return_type='id', target='subject')[0].strip("[']")
-    # session_label = layout.get(return_type='id', target='session')[0].strip("[']")
-
     filters = {}
-    if bids_sub:
-        filters["subject"] = [bids_sub]
-    else:
-        filters["subject"] = subjects
-    if bids_ses:
-        filters["session"] = [bids_ses]
-    else:
-        filters["session"] = sessions
 
-    if bids_acq:
-        filters["acquisition"] = bids_acq
+    if bids_filter_path:
+        with open(bids_filter_path) as f:
+            data = json.load(f)
+        try:
+            filters = data["t1w"]
+        except KeyError as ke:
+            print(ke)
+            logger.info("Maybe you used uppercase T...? Trying 'T1w' ")
+            pass
+        try:
+            filters = data["T1w"]
+        except KeyError as ke2:
+            print(ke2)
+        finally:
+            logger.info("BIDS filter file not formatted correctly.")
+            return False
+    else:
+        if bids_sub:
+            filters["subject"] = [bids_sub]
+        else:
+            filters["subject"] = subjects
+        if bids_ses:
+            filters["session"] = [bids_ses]
+        else:
+            filters["session"] = sessions
 
-    if bids_run:
-        filters["run"] = bids_run
+        if bids_acq:
+            filters["acquisition"] = bids_acq
+
+        if bids_run:
+            filters["run"] = bids_run
 
     anat_list = layout.get(return_type='file', extension=['.nii', '.nii.gz'], **filters)
 
