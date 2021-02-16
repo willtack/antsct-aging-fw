@@ -1,10 +1,9 @@
 #!/usr/local/miniconda/bin/python
 import sys
 import logging
-from zipfile import ZipFile
 from pathlib import PosixPath
 from fw_heudiconv.cli import export
-from bids import BIDSLayout
+import bids
 import flywheel
 import json
 import os
@@ -151,23 +150,19 @@ def fw_heudiconv_download():
     downloads = export.gather_bids(fw, project_label, subjects, sessions)
     export.download_bids(fw, downloads, str(bids_dir.resolve()), dry_run=False, folders_to_download=['anat'])
 
-    layout = BIDSLayout(bids_root)
+    bids.config.set_option('extension_initial_dot', True)  # suppress warning
+    layout = bids.BIDSLayout(bids_root)
     filters = {}
 
     if bids_filter_path:
+        logger.info("Using {} as BIDS filter.".format(bids_filter_path))
         with open(bids_filter_path) as f:
             data = json.load(f)
         try:
             filters = data["t1w"]
         except KeyError as ke:
             print(ke)
-            logger.info("Maybe you used uppercase T...? Trying 'T1w' ")
-            pass
-        try:
-            filters = data["T1w"]
-        except KeyError as ke2:
-            print(ke2)
-        finally:
+            logger.warning("Could not find 't1w' field in json.")
             logger.info("BIDS filter file not formatted correctly.")
             return False
     else:
@@ -191,7 +186,7 @@ def fw_heudiconv_download():
     # if there are multiple files or no files, error out
     # otherwise just use the one
     if len(anat_list) > 1:
-        logger.warning("Multiple anatomical files found in %s. If you want to process multiple images, use the longtidunal gear.",
+        logger.warning("Multiple anatomical files found in %s. If you want to process multiple images, use the longitudinal gear.",
                        bids_root)
         return False
     elif not len(anat_list) or len(anat_list) == 0:
