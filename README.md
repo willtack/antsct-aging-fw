@@ -1,4 +1,4 @@
-# flywheel/ANTS-CT
+# flywheel/ANTS-AGING-CT
 Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/master/spec) which runs the ANTs Cortical Thickness pipeline.
 
 Repository for original Docker image: https://github.com/ftdc-picsl/antsct-aging
