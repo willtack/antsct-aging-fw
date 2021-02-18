@@ -140,8 +140,8 @@ def fw_heudiconv_download():
     # Use manually specified T1 if it exists
     if manual_t1 is not None:
         anat_input = manual_t1_path
-        subject_label = subject_container.label.replace('_', 'x')
-        session_label = session_container.label.replace('_', 'x')
+        subject_label = subject_container.label.replace('_', 'x').replace(' ', 'x')
+        session_label = session_container.label.replace('_', 'x').replace(' ', 'x')
         prefix = 'sub-{}_ses-{}_'.format(subject_label, session_label)
         return True, anat_input, prefix
 
@@ -181,7 +181,7 @@ def fw_heudiconv_download():
         if bids_run:
             filters["run"] = bids_run
 
-    anat_list = layout.get(return_type='file', extension=['.nii', '.nii.gz'], **filters)
+    anat_list = layout.get(return_type='file', suffix='T1w', extension=['.nii', '.nii.gz'], **filters)
 
     # if there are multiple files or no files, error out
     # otherwise just use the one
