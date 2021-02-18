@@ -3,3 +3,4 @@ heuristic.py
 __pycache__/
 build_and_deploy.sh
 prepare_run2.py
+example_filter.json
