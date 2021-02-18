@@ -2,7 +2,7 @@
 	"name": "antsct-aging-fw",
 	"label": "FTDC ANTs Cortical Thickness",
 	"description": "Gear version of the FTDC antsCorticalThickness pipeline for aging populations. Performs 1. Brain extraction  2. Brain n-tissue segmentation  3. Cortical thickness  4. (Optional) registration to a template",
-	"version": "0.2.0_0.3.1",
+	"version": "0.2.1_0.3.1",
 	"inputs": {
 		"api_key": {
 			"base": "api-key"
@@ -144,7 +144,7 @@
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
-			"image": "willtack/antsct-aging-fw:0.2.0_0.3.1"
+			"image": "willtack/antsct-aging-fw:0.2.1_0.3.1"
 		},
 		"flywheel":{"suite": "FTD Center"}
 	}
