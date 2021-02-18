@@ -2,7 +2,7 @@
 
 ############################
 # Get the image from DockerHub
-FROM cookpa/antsct-aging:0.2.0
+FROM cookpa/antsct-aging:0.3.1
 
 MAINTAINER Will Tackett <William.Tackett@pennmedicine.upenn.edu>
 
@@ -35,12 +35,11 @@ RUN conda install -y python=3.7.1 \
     conda clean -tipsy && sync
 
 ############################
-# Install the Flywheel SDK
-RUN pip install flywheel-sdk==12.4.0
-RUN pip install heudiconv
-RUN pip install --upgrade fw-heudiconv ipython
-RUN pip install pybids
-
+# Install python packages
+RUN pip install flywheel-sdk==12.4.0 \
+                heudiconv==0.9.0 \
+                fw-heudiconv==0.3.3 \
+                pybids==0.12.4
 
 ############################
 # Make directory for flywheel spec (v0)

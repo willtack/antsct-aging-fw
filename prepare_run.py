@@ -99,7 +99,7 @@ with flywheel.GearContext() as context:
     denoise = int(config.get('denoise'))
     num_threads = config.get('num-threads')
     run_quick = int(config.get('run-quick'))
-    trim_neck = int(config.get('trim-neck'))
+    trim_neck_mode = config.get('trim-neck')
     bids_acq = config.get('BIDS-acq')
     bids_run = config.get('BIDS-run')
     bids_sub = config.get('BIDS-subject')
@@ -117,7 +117,7 @@ def write_command(anat_input, prefix):
                '--denoise {}'.format(denoise),
                '--num-threads {}'.format(num_threads),
                '--run-quick {}'.format(run_quick),
-               '--trim-neck {}'.format(trim_neck)
+               '--trim-neck-mode {}'.format(trim_neck_mode)
                ]
         if mni_cort_labels_paths_str:
             cmd.append('--mni-cortical-labels {}'.format(mni_cort_labels_paths_str))
