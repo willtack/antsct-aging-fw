@@ -94,7 +94,7 @@ if [[ $ANTS_EXITSTATUS == 0 ]]; then
       # zip folder (cd there is easier)
       pushd "$LEGACY_OUTPUT_DIR"
       #zip -r "${GEAR_OUTPUT_DIR}/antsct_${ANALYSIS_ID}.zip" ./*
-      zip -r "${GEAR_OUTPUT_DIR}/antsct_${subjectName}_${subjectName}.zip" ./*
+      zip -r "${GEAR_OUTPUT_DIR}/antsct_${subjectName}_${sessionName}.zip" ./*
       popd
 
       mv $(find "$LEGACY_OUTPUT_DIR" -type f | grep csv) "$LOOSE_DIR"
