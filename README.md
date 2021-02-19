@@ -1,10 +1,13 @@
-# flywheel/ANTS-AGING-CT
-Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/master/spec) which runs a specialized case of the ANTs Cortical Thickness pipeline for older patients.
+# flywheel/antsct-aging-fw
+Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/master/spec) which runs a specialized version of the [ANTs](https://github.com/ANTsX/ANTs) Cortical Thickness pipeline for older patients. The container/gear employs a template for older individuals provided by Nick Tustison and a script for masking out or cropping neck voxels using [c3d](https://github.com/pyushkevich/c3d) provided by Paul Yushkevich and Sandhitsu Das.
 
-Repository for base Docker image: https://github.com/ftdc-picsl/antsct-aging
+[DockerHub](https://hub.docker.com/repository/docker/willtack/antsct-aging-fw).
 
-antsCorticalThickness.sh [guide](https://github.com/ANTsX/ANTs/wiki/antsCorticalThickness-and-antsLongitudinalCorticalThickness-output) and [example](https://github.com/ntustison/antsCorticalThicknessExample)
+# Base image 
+[Github](https://github.com/ftdc-picsl/antsct-aging).
+[DockerHub](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general).
 
+# Runtime options
 #### Inputs:
 - bids-filter-file: *A JSON file describing custom BIDS input filters using PyBIDS. Must contain 't1w' key (note lowercase 't'). See [example_filter.json](https://github.com/willtack/antsct-aging-fw/blob/master/example_filter.json). More info [here](https://fmriprep.readthedocs.io/en/latest/faq.html#how-do-I-select-only-certain-files-to-be-input-to-fMRIPrep).*
 - t1w_anatomy: *T1-weighted anatomical NIfTI file. When provided this file will be used in place of any T1w images found in the current session's BIDS dataset.*
@@ -21,5 +24,7 @@ antsCorticalThickness.sh [guide](https://github.com/ANTsX/ANTs/wiki/antsCortical
     - crop: *crops neck region from image*
     - none: *uses the unaltered input image*
 
-#### Citation for original algorithm:
-Tustison NJ, Cook PA, Klein A, Song G, Das SR, Duda JT, Kandel BM, van Strien N, Stone JR, Gee JC, Avants BB. Large-scale evaluation of ANTs and FreeSurfer cortical thickness measurements. Neuroimage. 2014 Oct 1;99:166-79. doi: 10.1016/j.neuroimage.2014.05.044. Epub 2014 May 29. PMID: 24879923.
+# Original algorithm:
+antsCorticalThickness.sh [guide](https://github.com/ANTsX/ANTs/wiki/antsCorticalThickness-and-antsLongitudinalCorticalThickness-output) and [example](https://github.com/ntustison/antsCorticalThicknessExample)
+
+Reference: [Tustison et al, 2014.](http://dx.doi.org/10.1016/j.neuroimage.2014.05.044)
