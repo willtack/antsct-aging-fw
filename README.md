@@ -1,11 +1,12 @@
 # flywheel/antsct-aging-fw
 Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/master/spec) which runs a specialized version of the [ANTs](https://github.com/ANTsX/ANTs) Cortical Thickness pipeline for older patients. The container/gear employs a template for older individuals provided by Nick Tustison and a script for masking out or cropping neck voxels using [c3d](https://github.com/pyushkevich/c3d) provided by Paul Yushkevich and Sandhitsu Das.
 
-[DockerHub](https://hub.docker.com/repository/docker/willtack/antsct-aging-fw).
+[DockerHub](https://hub.docker.com/repository/docker/willtack/antsct-aging-fw)
 
 # Base image 
-[Github](https://github.com/ftdc-picsl/antsct-aging).
-[DockerHub](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general).
+[Github](https://github.com/ftdc-picsl/antsct-aging)
+
+[DockerHub](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general)
 
 # Runtime options
 #### Inputs:
@@ -25,6 +26,6 @@ Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/ma
     - none: *uses the unaltered input image*
 
 # Original algorithm:
-antsCorticalThickness.sh [guide](https://github.com/ANTsX/ANTs/wiki/antsCorticalThickness-and-antsLongitudinalCorticalThickness-output) and [example](https://github.com/ntustison/antsCorticalThicknessExample)
+antsCorticalThickness.sh [guide](https://github.com/ANTsX/ANTs/wiki/antsCorticalThickness-and-antsLongitudinalCorticalThickness-output) and [example](https://github.com/ntustison/antsCorticalThicknessExample).
 
 Reference: [Tustison et al, 2014.](http://dx.doi.org/10.1016/j.neuroimage.2014.05.044)
