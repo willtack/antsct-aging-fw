@@ -1,8 +1,6 @@
 # flywheel/antsct-aging-fw
 Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/master/spec) which runs a specialized version of the [ANTs](https://github.com/ANTsX/ANTs) Cortical Thickness pipeline for older patients. The container/gear employs a template for older individuals provided by Nick Tustison and a script for masking out or cropping neck voxels using [c3d](https://github.com/pyushkevich/c3d) provided by Paul Yushkevich and Sandhitsu Das.
 
-[DockerHub](https://hub.docker.com/repository/docker/willtack/antsct-aging-fw)
-
 # Base image 
 This gear is based on another [Docker image](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general) developed by Phil Cook which contains the primary run script. It can be run outside Flywheel. For more information, see the [Github repository](https://github.com/ftdc-picsl/antsct-aging).
 
