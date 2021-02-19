@@ -12,7 +12,7 @@ This gear is based on another [Docker image](https://hub.docker.com/repository/d
 - ***mni-cortical-labels-\****: One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.
 
 #### Configurations:
-- ***BIDS-\**** (subject, session, acq, run): Specify the minimum set of BIDS fields for uniquely distinguishing exactly one T1w image in the BIDS dataset. Will be overridden by t1w_anatomy input or bids-filter-file input.
+- ***BIDS-\****: (subject, session, acq, run): Specify the minimum set of BIDS fields for uniquely distinguishing exactly one T1w image in the BIDS dataset. Will be overridden by t1w_anatomy input or bids-filter-file input.
 - ***denoise***: Run denoising withing the ANTS Cortical Thickness pipeline. (Recommended).
 - ***num-threads***: Maximum number of CPU threads to use. Set to 0 to use as many threads as there are cores.*
 - ***run-quick***: whether or not to use a quick registration step. (Not recommended).
