@@ -9,7 +9,7 @@
 		},
 		"bids-filter-file": {
 			"base": "file",
-      		"description": "A JSON file describing custom BIDS input filters using PyBIDS. https://fmriprep.readthedocs.io/en/latest/faq.html#how-do-I-select-only-certain-files-to-be-input-to-fMRIPrep",
+      		"description": "A JSON file describing custom BIDS input filters using PyBIDS. Must contain 't1w' key (note lowercase 't'). See example_filter.json.More info: https://fmriprep.readthedocs.io/en/latest/faq.html#how-do-I-select-only-certain-files-to-be-input-to-fMRIPrep",
 			"optional": true
 		},
 		"t1_anatomy": {
@@ -54,7 +54,7 @@
 		},
 		"mni-cortical-labels-1": {
 			"base": "file",
-			"description": " One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
+			"description": "One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
 			"optional": true,
 			"type": {
 				"enum": [
@@ -64,7 +64,7 @@
 		},
 		"mni-cortical-labels-2": {
 			"base": "file",
-			"description": " One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
+			"description": "One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
 			"optional": true,
 			"type": {
 				"enum": [
@@ -74,7 +74,7 @@
 		},
 		"mni-cortical-labels-3": {
 			"base": "file",
-			"description": " One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
+			"description": "One or more cortical label images in the MNI152NLin2009cAsym space, to be propagated to the subject's cortical mask. Use this option if the label set contains only cortical labels.",
 			"optional": true,
 			"type": {
 				"enum": [
@@ -117,11 +117,6 @@
 		"run-quick": {
 			"default": false,
 			"description": "'true' to use quick registration, 'false' to use the default registration.",
-			"type": "boolean"
-		},
-		"trim-neck": {
-			"default": true,
-			"description": "'true' to run the trim_neck.sh script, 'false' to use the raw data.",
 			"type": "boolean"
 		},
 		"trim-neck-mode": {
