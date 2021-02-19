@@ -4,9 +4,7 @@ Build context for a [Flywheel Gear](https://github.com/flywheel-io/gears/tree/ma
 [DockerHub](https://hub.docker.com/repository/docker/willtack/antsct-aging-fw)
 
 # Base image 
-[Github](https://github.com/ftdc-picsl/antsct-aging)
-
-[DockerHub](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general)
+This gear is based on another [Docker image](https://hub.docker.com/repository/docker/cookpa/antsct-aging/general) developed by Phil Cook which contains the primary run script. It can be run outside Flywheel. For more information, see the [Github repository](https://github.com/ftdc-picsl/antsct-aging).
 
 # Runtime options
 #### Inputs:
