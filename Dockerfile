@@ -1,12 +1,7 @@
-#flywheel/antsct-aging
-
-############################
-# Get the image from DockerHub
 FROM cookpa/antsct-aging:0.3.1
 
 MAINTAINER Will Tackett <William.Tackett@pennmedicine.upenn.edu>
 
-############################
 # Install basic dependencies
 RUN apt-get update && apt-get -y install \
     jq \
@@ -17,7 +12,6 @@ RUN apt-get update && apt-get -y install \
     build-essential
 #RUN rm -f /usr/bin/python && ln -s /usr/bin/python /usr/bin/python3
 
-############################
 # Install conda environment
 RUN curl -sSLO https://repo.continuum.io/miniconda/Miniconda3-4.5.11-Linux-x86_64.sh && \
     bash Miniconda3-4.5.11-Linux-x86_64.sh -b -p /usr/local/miniconda && \
@@ -34,14 +28,12 @@ RUN conda install -y python=3.7.1 \
     conda build purge-all; sync && \
     conda clean -tipsy && sync
 
-############################
 # Install python packages
 RUN pip install flywheel-sdk==12.4.0 \
                 heudiconv==0.9.0 \
                 fw-heudiconv==0.3.3 \
                 pybids==0.12.4
 
-############################
 # Make directory for flywheel spec (v0)
 ENV FLYWHEEL /flywheel/v0
 RUN mkdir -p ${FLYWHEEL}
@@ -54,7 +46,6 @@ RUN chmod a+rx ${FLYWHEEL}/*
 # Set the entrypoint
 ENTRYPOINT ["/flywheel/v0/run"]
 
-############################
 # ENV preservation for Flywheel Engine
 RUN env -u HOSTNAME -u PWD | \
   awk -F = '{ print "export " $1 "=\"" $2 "\"" }' > ${FLYWHEEL}/docker-env.sh
