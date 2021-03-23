@@ -1,4 +1,4 @@
-#flywheel/fmriprep
+#flywheel/antsct-aging
 
 ############################
 # Get the image from DockerHub
