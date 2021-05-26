@@ -110,7 +110,7 @@
 			"type": "boolean"
 		},
 		"num-threads": {
-			"default": 1,
+			"default": 0,
 			"description": "Maximum number of CPU threads to use. Set to 0 to use as many threads as there are cores",
 			"type": "integer"
 		},
