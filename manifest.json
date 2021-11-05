@@ -136,6 +136,7 @@
 	"license": "Apache-2.0",
 	"source": "https://github.com/willtack/antsct-aging-fw",
 	"url": "https://doi.org/10.1117/12.2007128",
+	"environment": {"REQUESTS_CA_BUNDLE":"/etc/ssl/certs/ca-certificates.crt"},
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
