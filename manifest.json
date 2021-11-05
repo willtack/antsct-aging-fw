@@ -140,7 +140,7 @@
 	"custom": {
 		"gear-builder": {
 			"category": "analysis",
-			"image": "willtack/antsct-aging-fw:0.2.1_0.3.1"
+			"image": "willtack/antsct-aging-fw:0.3.1_0.3.3"
 		},
 		"flywheel":{"suite": "FTD Center"}
 	}
