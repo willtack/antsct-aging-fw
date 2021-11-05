@@ -2,6 +2,11 @@ FROM cookpa/antsct-aging:0.3.1
 
 MAINTAINER Will Tackett <William.Tackett@pennmedicine.upenn.edu>
 
+#Remove expired LetsEncrypt cert
+RUN rm /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt && \
+      update-ca-certificates
+ENV REQUESTS_CA_BUNDLE "/etc/ssl/certs/ca-certificates.crt"
+
 # Install basic dependencies
 RUN apt-get update && apt-get -y install \
     jq \
