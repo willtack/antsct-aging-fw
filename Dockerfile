@@ -1,4 +1,4 @@
-FROM cookpa/antsct-aging:0.3.1
+FROM cookpa/antsct-aging:0.3.3
 
 MAINTAINER Will Tackett <William.Tackett@pennmedicine.upenn.edu>
 
