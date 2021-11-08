@@ -34,7 +34,7 @@ RUN conda install -y python=3.7.1 \
     conda clean -tipsy && sync
 
 # Install python packages
-RUN pip install flywheel-sdk==12.4.0 \
+RUN pip install flywheel-sdk==14.6.6 \
                 heudiconv==0.9.0 \
                 fw-heudiconv==0.3.3 \
                 pybids==0.12.4
