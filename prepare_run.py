@@ -57,11 +57,11 @@ with flywheel.GearContext() as context:
     mni_cort_labels_1 = context.get_input('mni-cortical-labels-1')
     mni_cort_labels_1_path = None if mni_cort_labels_1 is None else \
         PosixPath(context.get_input_path('mni-cortical-labels-1'))
-    
+
     mni_cort_labels_2 = context.get_input('mni-cortical-labels-2')
     mni_cort_labels_2_path = None if mni_cort_labels_2 is None else \
         PosixPath(context.get_input_path('mni-cortical-labels-2'))
-    
+
     mni_cort_labels_3 = context.get_input('mni-cortical-labels-3')
     mni_cort_labels_3_path = None if mni_cort_labels_3 is None else \
         PosixPath(context.get_input_path('mni-cortical-labels-3'))
@@ -75,15 +75,15 @@ with flywheel.GearContext() as context:
     mni_labels_1 = context.get_input('mni-labels-1')
     mni_labels_1_path = None if mni_labels_1 is None else \
         PosixPath(context.get_input_path('mni-labels-1'))
-    
+
     mni_labels_2 = context.get_input('mni-labels-2')
     mni_labels_2_path = None if mni_labels_2 is None else \
         PosixPath(context.get_input_path('mni-labels-2'))
-    
+
     mni_labels_3 = context.get_input('mni-labels-3')
     mni_labels_3_path = None if mni_labels_3 is None else \
         PosixPath(context.get_input_path('mni-labels-3'))
-    
+
     # create space separated list (str)
     mni_labels_path_list = [mni_labels_1_path, mni_labels_2_path, mni_labels_3_path]
     # use list comprehension to remove None values
@@ -99,7 +99,7 @@ with flywheel.GearContext() as context:
     denoise = int(config.get('denoise'))
     num_threads = config.get('num-threads')
     run_quick = int(config.get('run-quick'))
-    trim_neck_mode = config.get('trim-neck')
+    trim_neck_mode = config.get('trim-neck-mode')
     bids_acq = config.get('BIDS-acq')
     bids_run = config.get('BIDS-run')
     bids_sub = config.get('BIDS-subject')
